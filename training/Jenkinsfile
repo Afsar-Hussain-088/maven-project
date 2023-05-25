@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                git 'https://github.com/kaushiki-bhattacharya-001/maven-project.git'
+                git 'https://github.com/Afsar-Hussain-088/maven-project.git'
                 sh "mvn -f training/pom.xml -Dmaven.test.skip=true clean compile"
             }
             post {
@@ -36,21 +36,21 @@ pipeline {
                 }
             }
         }
-        stage('Deploy') {
-            steps {
-                // Install and configure Minikube
-                // sh 'curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64'
-                // sh 'sudo install minikube-linux-amd64 /usr/local/bin/minikube'
-                sh 'minikube start --driver=docker'
-                sh 'docker build -t training/target/scholar-project.jar .'
-                sh 'minikube image load scholar-project.jar:latest'
-                sh 'kubectl apply -f training/deployment.yaml'
-            }
-            post {
-                success {
-                    echo "DEPLOYMENT SUCCESSFUL!"
-                }
-            }
-        }
+        // stage('Deploy') {
+        //     steps {
+        //         // Install and configure Minikube
+        //         // sh 'curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64'
+        //         // sh 'sudo install minikube-linux-amd64 /usr/local/bin/minikube'
+        //         sh 'minikube start --driver=docker'
+        //         sh 'docker build -t training/target/scholar-project.jar .'
+        //         sh 'minikube image load scholar-project.jar:latest'
+        //         sh 'kubectl apply -f training/deployment.yaml'
+        //     }
+        //     post {
+        //         success {
+        //             echo "DEPLOYMENT SUCCESSFUL!"
+        //         }
+        //     }
+        // }
     }
 }
